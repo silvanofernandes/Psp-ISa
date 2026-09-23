@@ -63,7 +63,7 @@ int main()
 
 
     print_Bill(total,netTotal);
-
+    printf("Hi world\n");
 
     return 0;
 
@@ -110,7 +110,7 @@ float discountedTotal(float total, int cM[], int cD[])
       scanf("%d", &choice);
 
 
-      if(choice <= couponCount)
+      if(choice <= couponCount && choice > 0)
       {
         return total - (total * (cD[choice-1] / 100.0f));
 
