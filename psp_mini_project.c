@@ -52,7 +52,7 @@ int main()
            printf("invalid choice!\n");
         }
 
-        printf("\nTotal = %.2f", total);
+        printf("\nTotal = %.2f\n", total);
 
         netTotal = discountedTotal(total,couponMilestones,couponDiscounts);
 
@@ -88,6 +88,7 @@ float calculate_Bill(int choice, int quantity, int prices[])
 
 float discountedTotal(float total, int Coupon_mil[], int Coupon_dis[])
 {
+    char add_more;
     int couponCount = 0;
     int choice;
     for(int i = 0; i < M; i++)
@@ -106,6 +107,15 @@ float discountedTotal(float total, int Coupon_mil[], int Coupon_dis[])
         }
 
     }
+
+    printf("\ndo you want  more to unlock more coupon(y/n)\n");
+    scanf(" %c",&add_more);
+
+    if(add_more == 'y' || add_more == 'Y')
+    {
+       return 1;
+    }
+
 
     while(couponCount>0)
     {
@@ -137,6 +147,8 @@ void print_Bill(float total,float netTotal)
     printf("SubTotal Amount : Rs.%.2f\n",total);
     printf("Grand Total Amount :  Rs. %.2f\nDiscount : Rs. %.2f\n", netTotal,total-netTotal);
     printf("Thank You! Visit Again!\n");
+
+
     printf("\nSave Bill? (y/n): ");
     scanf(" %c", &save);
 
