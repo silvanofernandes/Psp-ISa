@@ -64,7 +64,7 @@ int main()
     // netTotal = discountedTotal(total,couponMilestones,couponDiscounts);
 
     print_Bill(total,netTotal);
-
+    printf("Hi world\n");
 
     return 0;
 
@@ -113,7 +113,7 @@ float discountedTotal(float total, int Coupon_mil[], int Coupon_dis[])
       scanf("%d", &choice);
 
 
-      if(choice <= couponCount)
+      if(choice <= couponCount && choice > 0)
       {
         return total - (total * (Coupon_dis[choice-1] / 100.0f));
 
