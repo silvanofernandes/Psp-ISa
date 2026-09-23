@@ -1,11 +1,11 @@
 #include <stdio.h>
-#define N 4
-#define M 3 //No of Discount Coupons
+#define N 4 //No. of Menu Items
+#define M 3 //No. of Discount Coupons
 
 void displaymenu();
 float calculate_Bill(int choice, int quantity, int prices[]);
 void print_Bill(float total, float netTotal);
-float discountedTotal(float total, int Coupon_mil[], int Coupon_dis[]);
+float discountedTotal(float total, int couponMilestones[], int couponDiscounts[]);
 
 int main()
 {
@@ -61,7 +61,7 @@ int main()
 
     } while (more == 'y' || more == 'Y');
 
-    // netTotal = discountedTotal(total,couponMilestones,couponDiscounts);
+    // netTotal = Total Bill with Discount
 
     print_Bill(total,netTotal);
     printf("Hi world\n");
@@ -69,6 +69,7 @@ int main()
     return 0;
 
 }
+
 
 
 void displaymenu()
@@ -81,41 +82,36 @@ void displaymenu()
     printf("5. Exit\n");
 }
 
+
+
 float calculate_Bill(int choice, int quantity, int prices[])
 {
     return prices[choice-1] * quantity;
 }
 
-float discountedTotal(float total, int Coupon_mil[], int Coupon_dis[])
+
+
+float discountedTotal(float total, int couponMilestones[], int couponDiscounts[])
 {
     char add_more;
     int couponCount = 0;
     int choice;
     for(int i = 0; i < M; i++)
     {
-        printf("\n%d. %d\%% Off on Orders Above %d",i+1,Coupon_dis[i],Coupon_mil[i]);
-        if (total > Coupon_mil[i])
+        printf("\n%d. %d\%% Off on Orders Above %d",i+1,couponDiscounts[i],couponMilestones[i]);
+        if (total > couponMilestones[i])
         {
-            printf("\t- Elligible\n");
+            printf("\t- Eligible\n");
             couponCount++;
         }
         else
         {
-            float need = (Coupon_mil[i] + 1 ) -total;
+            float need = (couponMilestones[i] + 1 ) - total;
 
-            printf("\t- Not Elligible, Add Rs. %.2f more\n",need);
+            printf("\t- Not Eligible, Add Rs. %.2f more\n",need);
         }
 
     }
-
-    printf("\ndo you want  more to unlock more coupon(y/n)\n");
-    scanf(" %c",&add_more);
-
-    if(add_more == 'y' || add_more == 'Y')
-    {
-       return 1;
-    }
-
 
     while(couponCount>0)
     {
@@ -125,7 +121,7 @@ float discountedTotal(float total, int Coupon_mil[], int Coupon_dis[])
 
       if(choice <= couponCount && choice > 0)
       {
-        return total - (total * (Coupon_dis[choice-1] / 100.0f));
+        return total - (total * (couponDiscounts[choice-1] / 100.0f));
 
       }
       else
@@ -166,3 +162,7 @@ void print_Bill(float total,float netTotal)
         printf("\nBILL SAVED\n");
     }
 }
+
+//Project by Om, Silvano, Vernon, Daniel (FYBCA '26)
+//As ISA-3 Problem Solving and Programming
+//P.S No A.I was used for any of Code Generation!
