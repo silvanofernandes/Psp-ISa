@@ -5,14 +5,11 @@
 void displaymenu();
 float calculate_Bill(int choice, int quantity, int prices[]);
 void print_Bill(float total, float netTotal);
-float discountedTotal(float total, int couponMilestones[], int couponDiscounts[]);
+float discountedTotal(float total);
 
 int main()
 {
     int prices[N] = {120,250,100,80};
-
-    int couponDiscounts[M] = {20,40,60};
-    int couponMilestones[M] = {150,300,500};
 
     int choice, quantity;
     float total = 0;
@@ -20,7 +17,8 @@ int main()
     char more;
 
 
-    do {
+    do {
+
         displaymenu();
 
         printf("Enter your choice: ");
@@ -54,7 +52,7 @@ int main()
 
         printf("\nSub Total = %.2f\n", total);
 
-        netTotal = discountedTotal(total,couponMilestones,couponDiscounts);
+        netTotal = discountedTotal(total);
 
         printf("\nDo you want to order something else? (y/n): ");
         scanf(" %c", &more);
@@ -71,7 +69,6 @@ int main()
 }
 
 
-
 void displaymenu()
 {
     printf("\n========== MENU ==========\n");
@@ -79,9 +76,9 @@ void displaymenu()
     printf("2. Pizza         - Rs. 250\n");
     printf("3. Sandwich      - Rs. 100\n");
     printf("4. French Fries  - Rs. 80\n");
-    printf("5. Exit\n");
-}
+    printf("5. Exit\n");
 
+}
 
 
 float calculate_Bill(int choice, int quantity, int prices[])
@@ -90,12 +87,14 @@ float calculate_Bill(int choice, int quantity, int prices[])
 }
 
 
-
-float discountedTotal(float total, int couponMilestones[], int couponDiscounts[])
+float discountedTotal(float total)
 {
-    char add_more;
+    int couponDiscounts[M] = {20,40,60};
+    int couponMilestones[M] = {150,300,500};
+
     int couponCount = 0;
     int choice;
+
     for(int i = 0; i < M; i++)
     {
         printf("\n%d. %d\%% Off on Orders Above %d",i+1,couponDiscounts[i],couponMilestones[i]);
@@ -131,13 +130,14 @@ float discountedTotal(float total, int couponMilestones[], int couponDiscounts[]
 
     }
 
-    return 1;
+    return total;
 
 }
 
+
 void print_Bill(float total,float netTotal)
 {
-		  char save;
+    char save;
 
     printf("\n\n======= FINAL BILL =======\n");
     printf("Sub Total Amount : Rs.%.2f\n",total);
@@ -164,5 +164,5 @@ void print_Bill(float total,float netTotal)
 }
 
 //Project by Om, Silvano, Vernon, Daniel (FYBCA '26)
-//As ISA-3 Problem Solving and Programming
+//ISA-3 Problem Solving and Programming
 //P.S No A.I was used for any of Code Generation!
