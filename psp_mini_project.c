@@ -7,13 +7,13 @@ float calculate_Bill(int choice, int quantity, int prices[]);
 void print_Bill(float total, float netTotal);
 float discountedTotal(float total, int cM[], int cD[]);
 
-int main() 
-{  
+int main()
+{
     int prices[N] = {120,250,100,80};
-    
+
     int couponDiscounts[M] = {20,40,60};
     int couponMilestones[M] = {150,300,500};
-    
+
     int choice, quantity;
     float total = 0;
     float netTotal;
@@ -28,9 +28,9 @@ int main()
 
         if (choice >= 1 && choice <= 5)
         {
-            if (choice == 5) 
+            if (choice == 5)
             {
-                break; 
+                break;
             }
 
             printf("Enter Quantity: ");
@@ -46,27 +46,27 @@ int main()
                 printf("invalid quantity!\n");
             }
         }
-        
-        else 
+
+        else
         {
            printf("invalid choice!\n");
         }
-        
+
         printf("\nTotal = %.2f", total);
-        
+
         netTotal = discountedTotal(total,couponMilestones,couponDiscounts);
 
         printf("\nDo you want to order something else? (y/n): ");
         scanf(" %c", &more);
-        
+
     } while (more == 'y' || more == 'Y');
-    
-    
+
+
     print_Bill(total,netTotal);
-    
-    
+
+
     return 0;
-    
+
 }
 
 
@@ -80,72 +80,72 @@ void displaymenu()
     printf("5. Exit\n");
 }
 
-float calculate_Bill(int choice, int quantity, int prices[]) 
+float calculate_Bill(int choice, int quantity, int prices[])
 {
     return prices[choice-1] * quantity;
 }
 
-float discountedTotal(float total, int cM[], int cD[]) 
+float discountedTotal(float total, int cM[], int cD[])
 {
     int couponCount = 0;
     int choice;
     for(int i = 0; i < M; i++)
     {
         printf("%d. %d\%% Off on Orders Above %d",i+1,cD[i],cM[i]);
-        if (total > cM[i]) 
+        if (total > cM[i])
         {
             printf("\t- Elligible\n");
             couponCount++;
         }
-        else 
+        else
         {
             printf("\t- Not Elligible, Add Rs. %.2f more\n",cM[i]-total);
         }
-        
+
     }
-    
+
     while(couponCount>0)
     {
       printf("Choose Coupon\n");
       scanf("%d", &choice);
-      
-      
+
+
       if(choice <= couponCount)
       {
         return total - (total * (cD[choice-1] / 100.0f));
 
-      } 
+      }
       else
       {
           printf("Invalid Choice, try again\n");
       }
-      
-    } 
-    
+
+    }
+
     return 1;
-    
+
 }
 
 void print_Bill(float total,float netTotal)
 {
 		  char save;
-		  
+
     printf("\n\n======= FINAL BILL =======\n");
-    printf("Total Amount : Rs. %.2f\nDiscount : Rs. %.2f\n", netTotal,total-netTotal);
-    printf("Thank You! Visit Again!\n");    
+    printf("Total Amount :  Rs. %.2f\nDiscount : Rs. %.2f\n", netTotal,total-netTotal);
+    printf("Thank You! Visit Again!\n");
     printf("\nSave Bill? (y/n): ");
     scanf(" %c", &save);
-    
-    if(save == 'y' || save == 'Y') 
+
+    if(save == 'y' || save == 'Y')
     {
         FILE *bill = fopen("bills.txt","a");
-        
+
         fprintf(bill,"======= FINAL BILL =======\n");
         fprintf(bill,"Total Amount : Rs. %.2f\nDiscount : Rs. %.2f\n", netTotal,total-netTotal);
-        fprintf(bill,"Thank You! Visit Again!\n\n\n");  
-        
+        fprintf(bill,"Thank You! Visit Again!\n\n\n");
+
         fclose(bill);
-        
+
         printf("\nBILL SAVED\n");
     }
 }
