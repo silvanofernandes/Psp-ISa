@@ -52,7 +52,7 @@ int main()
            printf("invalid choice!\n");
         }
 
-        printf("\nTotal = %.2f\n", total);
+        printf("\nSub Total = %.2f\n", total);
 
         netTotal = discountedTotal(total,couponMilestones,couponDiscounts);
 
@@ -144,7 +144,7 @@ void print_Bill(float total,float netTotal)
 		  char save;
 
     printf("\n\n======= FINAL BILL =======\n");
-    printf("SubTotal Amount : Rs.%.2f\n",total);
+    printf("Sub Total Amount : Rs.%.2f\n",total);
     printf("Grand Total Amount :  Rs. %.2f\nDiscount : Rs. %.2f\n", netTotal,total-netTotal);
     printf("Thank You! Visit Again!\n");
 
@@ -157,7 +157,7 @@ void print_Bill(float total,float netTotal)
         FILE *bill = fopen("bills.txt","a");
 
         fprintf(bill,"======= FINAL BILL =======\n");
-        printf("SubTotal Amount : Rs.%.2f\n",total);
+        printf("Sub Total Amount : Rs.%.2f\n",total);
         fprintf(bill,"Grand Total Amount : Rs. %.2f\nDiscount : Rs. %.2f\n", netTotal,total-netTotal);
         fprintf(bill,"Thank You! Visit Again!\n\n\n");
 
@@ -166,4 +166,3 @@ void print_Bill(float total,float netTotal)
         printf("\nBILL SAVED\n");
     }
 }
-
