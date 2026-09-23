@@ -5,7 +5,7 @@
 void displaymenu();
 float calculate_Bill(int choice, int quantity, int prices[]);
 void print_Bill(float total, float netTotal);
-float discountedTotal(float total, int cM[], int cD[]);
+float discountedTotal(float total, int Coupon_mil[], int Coupon_dis[]);
 
 int main()
 {
@@ -61,6 +61,7 @@ int main()
 
     } while (more == 'y' || more == 'Y');
 
+    // netTotal = discountedTotal(total,couponMilestones,couponDiscounts);
 
     print_Bill(total,netTotal);
 
@@ -85,21 +86,23 @@ float calculate_Bill(int choice, int quantity, int prices[])
     return prices[choice-1] * quantity;
 }
 
-float discountedTotal(float total, int cM[], int cD[])
+float discountedTotal(float total, int Coupon_mil[], int Coupon_dis[])
 {
     int couponCount = 0;
     int choice;
     for(int i = 0; i < M; i++)
     {
-        printf("%d. %d\%% Off on Orders Above %d",i+1,cD[i],cM[i]);
-        if (total > cM[i])
+        printf("\n%d. %d\%% Off on Orders Above %d",i+1,Coupon_dis[i],Coupon_mil[i]);
+        if (total > Coupon_mil[i])
         {
             printf("\t- Elligible\n");
             couponCount++;
         }
         else
         {
-            printf("\t- Not Elligible, Add Rs. %.2f more\n",cM[i]-total);
+            float need = (Coupon_mil[i] + 1 ) -total;
+
+            printf("\t- Not Elligible, Add Rs. %.2f more\n",need);
         }
 
     }
@@ -112,7 +115,7 @@ float discountedTotal(float total, int cM[], int cD[])
 
       if(choice <= couponCount)
       {
-        return total - (total * (cD[choice-1] / 100.0f));
+        return total - (total * (Coupon_dis[choice-1] / 100.0f));
 
       }
       else
@@ -131,7 +134,9 @@ void print_Bill(float total,float netTotal)
 		  char save;
 
     printf("\n\n======= FINAL BILL =======\n");
-    printf("Total Amount :  Rs. %.2f\nDiscount : Rs. %.2f\n", netTotal,total-netTotal);
+    printf("SubTotal Amount : Rs.%.2f",total);
+    printf(" discount %.2f \n : ",total - netTotal);
+    printf("Grand Total Amount :  Rs. %.2f\nDiscount : Rs. %.2f\n", netTotal,total-netTotal);
     printf("Thank You! Visit Again!\n");
     printf("\nSave Bill? (y/n): ");
     scanf(" %c", &save);
@@ -141,7 +146,8 @@ void print_Bill(float total,float netTotal)
         FILE *bill = fopen("bills.txt","a");
 
         fprintf(bill,"======= FINAL BILL =======\n");
-        fprintf(bill,"Total Amount : Rs. %.2f\nDiscount : Rs. %.2f\n", netTotal,total-netTotal);
+        printf("SubTotal Amount : Rs.%.2f\n",total);
+        fprintf(bill,"Grand Total Amount : Rs. %.2f\nDiscount : Rs. %.2f\n", netTotal,total-netTotal);
         fprintf(bill,"Thank You! Visit Again!\n\n\n");
 
         fclose(bill);
