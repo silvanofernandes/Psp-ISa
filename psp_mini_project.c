@@ -134,8 +134,7 @@ void print_Bill(float total,float netTotal)
 		  char save;
 
     printf("\n\n======= FINAL BILL =======\n");
-    printf("SubTotal Amount : Rs.%.2f",total);
-    printf(" discount %.2f \n : ",total - netTotal);
+    printf("SubTotal Amount : Rs.%.2f\n",total);
     printf("Grand Total Amount :  Rs. %.2f\nDiscount : Rs. %.2f\n", netTotal,total-netTotal);
     printf("Thank You! Visit Again!\n");
     printf("\nSave Bill? (y/n): ");
