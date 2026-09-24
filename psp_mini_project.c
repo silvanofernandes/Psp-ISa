@@ -7,7 +7,7 @@ float calculate_Bill(int choice, int quantity, int prices[]);
 void print_Bill(float total, float netTotal);
 float discountedTotal(float total);
 
-int main()
+int main(void)
 {
     int prices[N] = {120,250,100,80};
 
@@ -106,7 +106,6 @@ float discountedTotal(float total)
         else
         {
             float need = (couponMilestones[i] + 1 ) - total;
-
             printf("\t- Not Eligible, Add Rs. %.2f more\n",need);
         }
 
@@ -121,7 +120,6 @@ float discountedTotal(float total)
       if(choice <= couponCount && choice > 0)
       {
         return total - (total * (couponDiscounts[choice-1] / 100.0f));
-
       }
       else
       {
@@ -153,7 +151,7 @@ void print_Bill(float total,float netTotal)
         FILE *bill = fopen("bills.txt","a");
 
         fprintf(bill,"======= FINAL BILL =======\n");
-        printf("Sub Total Amount : Rs.%.2f\n",total);
+        fprintf(bill,"Sub Total Amount : Rs.%.2f\n",total);
         fprintf(bill,"Grand Total Amount : Rs. %.2f\nDiscount : Rs. %.2f\n", netTotal,total-netTotal);
         fprintf(bill,"Thank You! Visit Again!\n\n\n");
 
@@ -165,4 +163,4 @@ void print_Bill(float total,float netTotal)
 
 //Project by Om, Silvano, Vernon, Daniel (FYBCA '26)
 //ISA-3 Problem Solving and Programming
-//P.S No A.I was used for any of Code Generation!
+//P.S No A.I was used for any of Code 
